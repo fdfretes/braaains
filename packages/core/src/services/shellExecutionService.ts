@@ -147,6 +147,11 @@ export class ShellExecutionService {
       let sniffedBytes = 0;
 
       const handleOutput = (data: Buffer) => {
+        // NOTE: The migration from `child_process` to `node-pty` means we
+        // no longer have separate `stdout` and `stderr` streams. The `data`
+        // buffer contains the merged output. If a drop in LLM quality is
+        // observed after this change, we may need to revisit this and
+        // explore ways to re-introduce that distinction.
         processingChain = processingChain.then(
           () =>
             new Promise<void>((resolve) => {
@@ -223,7 +228,7 @@ export class ShellExecutionService {
 
       const abortHandler = async () => {
         if (ptyProcess.pid && !exited) {
-          ptyProcess.kill();
+          ptyProcess.kill('SIGHUP');
         }
       };
 
