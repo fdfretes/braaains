@@ -131,6 +131,29 @@ export class DiscoveredMCPTool extends BaseTool<ToolParams, ToolResult> {
     ];
 
     const rawResponseParts = await this.mcpTool.callTool(functionCalls);
+
+    // This check is scoped specifically to the 'github' MCP server.
+    // TODO: Figure out if this logic should run for all MCP servers.
+    if (this.serverName === 'github') {
+      const functionResponse = rawResponseParts?.[0]?.functionResponse;
+      const response = functionResponse?.response;
+
+      interface McpError {
+        isError?: boolean;
+      }
+
+      if (response) {
+        const error = (response as { error?: McpError })?.error;
+        const isError = error?.isError;
+
+        if (error && isError) {
+          throw new Error(
+            `MCP tool '${this.serverToolName}' reported the error: ${JSON.stringify(error)}`,
+          );
+        }
+      }
+    }
+
     const transformedParts = transformMcpContentToParts(rawResponseParts);
 
     return {
