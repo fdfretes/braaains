@@ -4,17 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AyuDark } from './ayu.js';
-import { AyuLight } from './ayu-light.js';
-import { AtomOneDark } from './atom-one-dark.js';
-import { Dracula } from './dracula.js';
-import { GitHubDark } from './github-dark.js';
-import { GitHubLight } from './github-light.js';
-import { GoogleCode } from './googlecode.js';
-import { DefaultLight } from './default-light.js';
-import { DefaultDark } from './default.js';
-import { ShadesOfPurple } from './shades-of-purple.js';
-import { XCode } from './xcode.js';
+import { Future } from './future.js';
 import {
   Theme,
   ThemeType,
@@ -23,8 +13,6 @@ import {
   validateCustomTheme,
 } from './theme.js';
 import { SemanticColors } from './semantic-tokens.js';
-import { ANSI } from './ansi.js';
-import { ANSILight } from './ansi-light.js';
 import { NoColorTheme } from './no-color.js';
 import process from 'node:process';
 
@@ -34,7 +22,7 @@ export interface ThemeDisplay {
   isCustom?: boolean;
 }
 
-export const DEFAULT_THEME: Theme = DefaultDark;
+export const DEFAULT_THEME: Theme = Future;
 
 class ThemeManager {
   private readonly availableThemes: Theme[];
@@ -42,21 +30,7 @@ class ThemeManager {
   private customThemes: Map<string, Theme> = new Map();
 
   constructor() {
-    this.availableThemes = [
-      AyuDark,
-      AyuLight,
-      AtomOneDark,
-      Dracula,
-      DefaultLight,
-      DefaultDark,
-      GitHubDark,
-      GitHubLight,
-      GoogleCode,
-      ShadesOfPurple,
-      XCode,
-      ANSI,
-      ANSILight,
-    ];
+    this.availableThemes = [Future];
     this.activeTheme = DEFAULT_THEME;
   }
 

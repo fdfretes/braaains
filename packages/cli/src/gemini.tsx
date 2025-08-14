@@ -21,7 +21,6 @@ import {
   loadSettings,
   SettingScope,
 } from './config/settings.js';
-import { themeManager } from './ui/themes/theme-manager.js';
 import { getStartupWarnings } from './utils/startupWarnings.js';
 import { getUserStartupWarnings } from './utils/userStartupWarnings.js';
 import { runNonInteractive } from './nonInteractiveCli.js';
@@ -197,16 +196,6 @@ export async function main() {
     logIdeConnection(config, new IdeConnectionEvent(IdeConnectionType.START));
   }
 
-  // Load custom themes from settings
-  themeManager.loadCustomThemes(settings.merged.customThemes);
-
-  if (settings.merged.theme) {
-    if (!themeManager.setActiveTheme(settings.merged.theme)) {
-      // If the theme is not found during initial load, log a warning and continue.
-      // The useThemeCommand hook in App.tsx will handle opening the dialog.
-      console.warn(`Warning: Theme "${settings.merged.theme}" not found.`);
-    }
-  }
 
   // hop into sandbox if we are outside and sandboxing is enabled
   if (!process.env.SANDBOX) {
