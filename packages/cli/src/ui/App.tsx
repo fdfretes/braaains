@@ -502,6 +502,7 @@ const App = ({ config, settings, startupWarnings = [], version }: AppProps) => {
     loadHistory,
     refreshStatic,
     setDebugMessage,
+    () => {},
     openAuthDialog,
     openEditorDialog,
     toggleCorgiMode,
