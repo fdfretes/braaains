@@ -1,3 +1,11 @@
+# Theme: Future (Fork Customization)
+This fork uses a single, fixed theme named "Future". Theme switching and the `/theme` command are disabled.
+- Palette: gradient pink → cyan → lime
+  - Pink: #FF1493
+  - Cyan: #00BFFF
+  - Lime: #7FFF00
+
+The rest of this document describes upstream theming in the original project and may not apply to this fork.
 # Themes
 
 Gemini CLI supports a variety of themes to customize its color scheme and appearance. You can change the theme to suit your preferences via the `/theme` command or `"theme":` configuration setting.
