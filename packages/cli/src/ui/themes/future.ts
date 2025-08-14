@@ -3,11 +3,13 @@
  * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-import { Theme } from './theme.js';
+
+import type { CSSProperties } from 'react';
+import { Theme, type ColorsTheme } from './theme.js';
 import { SemanticColors } from './semantic-tokens.js';
 
-const colors = {
-  type: 'dark' as const,
+const colors: ColorsTheme = {
+  type: 'dark',
   Background: '#1A1B1E',
   Foreground: '#E6E6E6',
   LightBlue: '#00BFFF',
@@ -54,7 +56,7 @@ const semanticColors: SemanticColors = {
   },
 };
 
-const rawMappings = {
+const rawMappings: Record<string, CSSProperties> = {
   hljs: {
     display: 'block',
     overflowX: 'auto',
@@ -112,5 +114,4 @@ const rawMappings = {
   },
 };
 
-export const Future = new Theme('Future', 'dark', rawMappings as any, colors as any, semanticColors);
-export default Future;
+export const Future = new Theme('Future', 'dark', rawMappings, colors, semanticColors);

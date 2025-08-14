@@ -164,7 +164,6 @@ const App = ({ config, settings, startupWarnings = [], version }: AppProps) => {
 
   const [geminiMdFileCount, setGeminiMdFileCount] = useState<number>(0);
   const [debugMessage, setDebugMessage] = useState<string>('');
-  const [themeError, setThemeError] = useState<string | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
   const [editorError, setEditorError] = useState<string | null>(null);
   const [footerHeight, setFooterHeight] = useState<number>(0);
@@ -503,7 +502,6 @@ const App = ({ config, settings, startupWarnings = [], version }: AppProps) => {
     loadHistory,
     refreshStatic,
     setDebugMessage,
-    openThemeDialog,
     openAuthDialog,
     openEditorDialog,
     toggleCorgiMode,
@@ -820,7 +818,6 @@ const App = ({ config, settings, startupWarnings = [], version }: AppProps) => {
       !initialPromptSubmitted.current &&
       !isAuthenticating &&
       !isAuthDialogOpen &&
-      !isThemeDialogOpen &&
       !isEditorDialogOpen &&
       !showPrivacyNotice &&
       geminiClient?.isInitialized?.()
@@ -833,7 +830,6 @@ const App = ({ config, settings, startupWarnings = [], version }: AppProps) => {
     submitQuery,
     isAuthenticating,
     isAuthDialogOpen,
-    isThemeDialogOpen,
     isEditorDialogOpen,
     showPrivacyNotice,
     geminiClient,
